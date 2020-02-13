@@ -1,6 +1,8 @@
 /* eslint-disable react/state-in-constructor */
 import React, { Component } from 'react';
 
+import { Link } from 'react-router-dom';
+
 import { FaSpinner } from 'react-icons/fa';
 import { Container, SubmitButton, Form, List } from './styles';
 
@@ -68,7 +70,7 @@ export default class Main extends Component {
           {address.map(a => (
             <li key={a.cep}>
               <span>Cep: {a.cep}</span>
-              <a href="/">Detalhes</a>
+              <Link to={`/details/${a.cep}`}>Detalhes</Link>
             </li>
           ))}
         </List>
