@@ -1,5 +1,7 @@
+/* eslint-disable react/static-property-placement */
 import React, { Component } from 'react';
 
+import PropTypes from 'prop-types';
 import api from '../../services/api';
 
 import { Container, List, Loading } from './styles';
@@ -8,6 +10,14 @@ export default class Details extends Component {
   state = {
     address: {},
     loading: false,
+  };
+
+  static propTypes = {
+    match: PropTypes.shape({
+      params: PropTypes.shape({
+        cep: PropTypes.string,
+      }),
+    }).isRequired,
   };
 
   async componentDidMount() {
@@ -20,8 +30,6 @@ export default class Details extends Component {
     const response = await api.get(`/${postCode}/json/`);
 
     this.setState({ address: response.data, loading: false });
-
-    console.log(this.state.address);
   }
 
   render() {
