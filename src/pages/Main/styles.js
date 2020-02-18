@@ -5,7 +5,7 @@ export const Container = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  margin: 80px auto;
+  margin: 20px auto;
   max-width: 700px;
   background: #fffffe;
   padding: 60px 120px;
@@ -37,7 +37,7 @@ export const Form = styled.form`
   margin-top: 20px;
   input {
     padding: 10px 20px;
-    border: 1px solid #ddd;
+    border: 1px solid ${props => (props.error ? 'red' : '#ddd')};
     color: #94a1b2;
     &:focus {
       border: 1px solid #7f5af0;
@@ -59,6 +59,12 @@ export const List = styled.ul`
     & + li {
       border-top: 1px solid #eee;
     }
+
+    button {
+      background: none;
+      border: 0;
+    }
+
     a {
       text-decoration: none;
     }

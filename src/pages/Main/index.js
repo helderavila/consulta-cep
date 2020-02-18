@@ -4,6 +4,8 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
 import { FaSpinner } from 'react-icons/fa';
+import { IoMdInformationCircleOutline } from 'react-icons/io';
+import { AiOutlineDelete } from 'react-icons/ai';
 import { Container, SubmitButton, Form, List } from './styles';
 
 import api from '../../services/api';
@@ -13,6 +15,7 @@ export default class Main extends Component {
     newCep: '',
     address: [],
     loading: false,
+    error: false,
   };
 
   componentDidMount() {
@@ -37,9 +40,14 @@ export default class Main extends Component {
 
   handleSubmit = async e => {
     e.preventDefault();
+
     this.setState({ loading: true });
 
     const { newCep, address } = this.state;
+
+    if (newCep === '') {
+      this.setState({ error: true, loading: false });
+    }
 
     const response = await api.get(`/${newCep}/json/`);
 
@@ -50,15 +58,25 @@ export default class Main extends Component {
     });
   };
 
+  handleDelete = cep => {
+    const { address } = this.state;
+    const array = [...address];
+    const index = array.indexOf(cep);
+
+    array.splice(index, 1);
+    this.setState({ address: array });
+  };
+
   render() {
-    const { newCep, loading, address } = this.state;
+    const { newCep, loading, address, error } = this.state;
     return (
       <Container>
-        <h1>Consulta CEP</h1>
-        <Form onSubmit={this.handleSubmit}>
+        <h1>Digite um cep</h1>
+        <Form onSubmit={this.handleSubmit} error={error}>
           <input
             type="text"
             placeholder="Adicionar CEP"
+            maxLength="9"
             value={newCep}
             onChange={this.handleInputChange}
           />
@@ -69,8 +87,16 @@ export default class Main extends Component {
         <List>
           {address.map(a => (
             <li key={a.cep}>
-              <span>Cep: {a.cep}</span>
-              <Link to={`/details/${a.cep}`}>Detalhes</Link>
+              <span>
+                <strong>CEP:</strong> {a.cep}
+              </span>
+
+              <button type="button" onClick={() => this.handleDelete(a.cep)}>
+                <AiOutlineDelete syze={30} color="#7159c1" />
+              </button>
+              <Link to={`/details/${a.cep}`}>
+                <IoMdInformationCircleOutline size={14} color="#7159c1" />
+              </Link>
             </li>
           ))}
         </List>

@@ -5,7 +5,7 @@ export const Container = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  margin: 80px auto;
+  margin: 20px auto;
   max-width: 700px;
   background: #fffffe;
   padding: 60px 120px;
@@ -19,7 +19,7 @@ export const Container = styled.div`
 
 export const List = styled.ul`
   list-style: none;
-  margin-top: 30px;
+  margin-top: 10px;
   padding-top: 30px;
   border-top: 1px solid #eee;
   li {
