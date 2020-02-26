@@ -15,6 +15,25 @@ export const Container = styled.div`
     font-size: 32px;
     color: #16161a;
   }
+
+  form {
+    margin-top: 20px;
+    input {
+      padding: 10px 20px;
+      border: 1px solid ${props => (props.error ? 'red' : '#ddd')};
+      color: #94a1b2;
+      &:focus {
+        border: 1px solid #7f5af0;
+      }
+    }
+    span {
+      position: absolute;
+      margin-left: -210px;
+      margin-top: 50px;
+      color: red;
+      font-weight: bold;
+    }
+  }
 `;
 
 export const SubmitButton = styled.button.attrs(props => ({
@@ -30,18 +49,6 @@ export const SubmitButton = styled.button.attrs(props => ({
   &[disabled] {
     cursor: not-allowed;
     opacity: 0.6;
-  }
-`;
-
-export const Form = styled.form`
-  margin-top: 20px;
-  input {
-    padding: 10px 20px;
-    border: 1px solid ${props => (props.error ? 'red' : '#ddd')};
-    color: #94a1b2;
-    &:focus {
-      border: 1px solid #7f5af0;
-    }
   }
 `;
 
